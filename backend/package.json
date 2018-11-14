@@ -1,0 +1,19 @@
+{
+  "name": "bet",
+  "version": "0.0.1",
+  "description": "bet - a social betting app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lowewenzel/bet.git"
+  },
+  "author": "lowewenzel & tkrain23",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lowewenzel/bet/issues"
+  },
+  "homepage": "https://github.com/lowewenzel/bet#readme"
+}
