@@ -8,27 +8,27 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 // Must be authenticated
 const checkAuthentication = (req, res, next) => {
-  console.log(req.body)
-  if (req.body.token === null) {
-    req.user = null;
-    // res.status(401).json({ message: 'Error: Signed out' }).send();
-    next();
+  if (!req.cookies.nToken) {
+    res.redirect('/');
   } else {
-    const { token } = req.body;
-    const decodedToken = jwt.verify(token, config.jwtSecret, (err, decoded) => {
-      req.user = decoded;
-      next();
-    })
-    
+    const { nToken } = req.cookies;
+    const decodedToken = jwt.verify(nToken, config.jwtSecret, (err, decoded) => {
+      if (err) {
+        res.redirect('/');
+      } else {
+        req.user = decoded;
+        next();
+      }
+    });
   }
 };
 
-router.get('/', userController.getUsers);
+router.get('/profile', checkAuthentication, userController.getUser);
 
-router.get('/:username', userController.getOneUser);
+// router.get('/:username', userController.getOneUser);
 
-router.patch('/:username', checkAuthentication, userController.updateUser);
+// router.patch('/:username', checkAuthentication, userController.updateUser);
 
-router.post('/:username/delete', checkAuthentication, userController.deleteUser);
+// router.post('/:username/delete', checkAuthentication, userController.deleteUser);
 
 module.exports = router;

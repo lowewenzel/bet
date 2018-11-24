@@ -7,14 +7,18 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
   createdAt: { type: Date },
   updatedAt: { type: Date },
-  username: {
-    type: String, unique: true, required: true, uniqueCaseInsensitive: true,
+  firstName: {
+    type: String, required: true,
   },
-  password: { type: String, required: true, select: false },
-  fbUsername: { type: String }, // facebook
-  igUsername: { type: String }, // instagram
-  twUsername: { type: String }, // twitter
-  scUsername: { type: String }, // snapchat
+  lastName: {
+    type: String,
+  },
+  email: {
+    type: String, required: true, unique: true, uniqueCaseInsensitive: true,
+  },
+  password: {
+    type: String, required: true, select: false
+  },
   // isAdmin: { type: Boolean, default: false }, // Admin Privileges(CRUD users)
 });
 

@@ -17,13 +17,13 @@ const envVarsSchema = Joi.object({
   JWT_SECRET: Joi.string()
     .required()
     .description('JWT Secret required to sign'),
+  COOKIE_SECRET: Joi.string()
+    .required()
+    .description('Cookie Secret required to sign'),
   MONGO_HOST: Joi.string()
     .required()
     .description('Mongo DB host url'),
   MONGO_PORT: Joi.number().default(27017),
-  API_URL: Joi.string()
-    .required()
-    .description('API Url'),
 })
   .unknown()
   .required();
@@ -42,7 +42,7 @@ const config = {
     host: envVars.MONGO_HOST,
     port: envVars.MONGO_PORT,
   },
-  api: envVars.API_URL
+  cookieSecret: envVars.COOKIE_SECRET,
 };
 
 module.exports = config;

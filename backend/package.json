@@ -15,5 +15,22 @@
   "bugs": {
     "url": "https://github.com/lowewenzel/bet/issues"
   },
-  "homepage": "https://github.com/lowewenzel/bet#readme"
+  "homepage": "https://github.com/lowewenzel/bet#readme",
+  "dependencies": {
+    "bcryptjs": "false2.4.3",
+    "connect-flash": "false0.1.1",
+    "cookie-parser": "false1.4.3",
+    "cors": "false2.8.5",
+    "dotenv": "false6.1.0",
+    "eslint": "false5.9.0",
+    "eslint-config-airbnb-base": "false13.1.0",
+    "eslint-plugin-import": "false2.14.0",
+    "express": "false4.16.4",
+    "express-session": "false1.15.6",
+    "joi": "false14.1.0",
+    "jsonwebtoken": "false8.4.0",
+    "mongoose": "false5.3.13",
+    "mongoose-unique-validator": "false2.0.2",
+    "pug": "false2.0.3"
+  }
 }

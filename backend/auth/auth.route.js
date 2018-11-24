@@ -3,11 +3,29 @@ const authController = require('./auth.controller');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-router.post('/new', authController.postNewUser);
+// GET Routes
 
-// router.post('/check', authController.checkUsername);
+router.get('/signup', (req, res) => {
+  if (req.cookies.nToken) {
+    res.redirect('/'); // Go home if logged in
+  } else {
+    res.render('signup', { title: 'Signup', message: 'Signup User', error: req.flash('error') });
+  }
+});
 
-router.post('/login', authController.loginUser);
+router.get('/login', (req, res) => {
+  if (req.cookies.nToken) {
+    res.redirect('/'); // Go home if logged in
+  } else {
+    res.render('login', { title: 'Login', message: 'Login User', error: req.flash('error') });
+  }
+});
 
-router.post('/logout', authController.logoutUser);
+// POST routes
+
+router.post('/auth/new', authController.postNewUser);
+
+router.post('/auth/login', authController.loginUser);
+
+router.get('/auth/logout', authController.logoutUser);
 module.exports = router;

@@ -16,14 +16,14 @@ exports.getUsers = function getUsers(req, res) {
   // }
 };
 
-exports.getOneUser = function getOneUser(req, res) {
-  // User.findOne({ username: req.params.username }, 'username igUsername fbUsername twUsername scUsername')
-  //   .then((user) => {
-  //     res.status(200).json(user).send();
-  //   })
-  //   .catch((err) => {
-  //     res.status(400).json({ message: err.message });
-  //   });
+exports.getUser = function getUser(req, res) {
+  User.findOne({ email: req.user.email }, 'firstName lastName email')
+    .then((user) => {
+      res.status(200).render('profile', { firstName: user.firstName, lastName: user.lastName, email: user.email });
+    })
+    .catch((err) => {
+      res.status(400).redirect('/');
+    });
 };
 
 exports.updateUser = function updateUser(req, res) {
