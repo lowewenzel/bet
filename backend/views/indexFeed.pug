@@ -10,14 +10,15 @@ html
     a(href='/profile') Profile
     a(href='/auth/logout') Logout
     a(href='/bets/new') New Bet
+    a(href='/bets') My Bets
     h3 All Bets Feed
     ul
       each bet, index in bets
         li
           div
             if bet.completed
-              h3(style="color:green") bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
+              a(href=`/bet/${bet._id}`, style="color:green") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
             else
-              h3(style="color:red") bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
+              a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
             h4 #{bet.betValue}
             p #{bet.betDescription}

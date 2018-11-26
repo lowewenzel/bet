@@ -33,6 +33,8 @@ router.get('/bets/new', (req, res) => {
 
 router.post('/bets/new', checkAuthentication, betController.postNewBet);
 
+router.get('/bets', checkAuthentication, betController.getBets);
+
 router.get('/bet/:id', betController.getBet);
 
 // router.get('/:username', userController.getOneUser);

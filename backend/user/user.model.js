@@ -19,6 +19,7 @@ const UserSchema = new Schema({
   password: {
     type: String, required: true, select: false
   },
+  bets: [{type: Schema.Types.ObjectId, ref: 'Bet'}]
   // isAdmin: { type: Boolean, default: false }, // Admin Privileges(CRUD users)
 });
 

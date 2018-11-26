@@ -24,6 +24,13 @@ exports.postNewBet = function postNewBet(req, res) {
           const newBet = new Bet({
             betDescription, betValue, userA: origUser, userB: user
           });
+
+          // Save bet to user objects
+          origUser.bets.unshift(newBet);
+          user.bets.unshift(newBet);
+          origUser.save();
+          user.save();
+
           newBet.save()
             .then((bet) => {
               res.status(200).redirect(`/bet/${bet._id}`);
@@ -51,7 +58,28 @@ function getBetFromDb(id, callback) {
   Bet.findById(id)
     .populate('userA')
     .populate('userB')
-    .then((bet) => { callback(bet); });
+    .then(
+      bet => callback(bet)
+    );
+}
+
+function getMyBets(_id, callback) {
+  User.findById(_id, 'bets')
+    .populate({
+      path: 'bets',
+      populate: {
+        path: 'userA'
+      }
+    })
+    .populate({
+      path: 'bets',
+      populate: {
+        path: 'userB'
+      }
+    })
+    .then(
+      bets => callback(bets.bets)
+    );
 }
 
 exports.getIndex = function getIndex(req, res) {
@@ -72,6 +100,15 @@ exports.getBet = function getBet(req, res) {
     res.redirect('/');
   } else {
     getBetFromDb(req.params.id, bet => res.render('betView', { title: `Bet between ${bet.userA.firstName} and ${bet.userB.firstName}`, bet }));
+  }
+};
+
+exports.getBets = function getBets(req, res) {
+  if (!req.cookies.nToken) {
+    req.flash('homeError', 'You must be logged in to view Bets!');
+    res.redirect('/');
+  } else {
+    getMyBets(req.user._id, bets => res.render('myBets', { bets }));
   }
 };
 
