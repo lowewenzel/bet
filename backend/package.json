@@ -4,7 +4,7 @@
   "description": "bet - a social betting app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors auth --recursive"
   },
   "repository": {
     "type": "git",
@@ -32,5 +32,11 @@
     "mongoose": "false5.3.13",
     "mongoose-unique-validator": "false2.0.2",
     "pug": "false2.0.3"
+  },
+  "devDependencies": {
+    "chai": "false4.2.0",
+    "chai-http": "false4.2.0",
+    "cross-env": "false5.2.0",
+    "mocha": "false5.2.0"
   }
 }

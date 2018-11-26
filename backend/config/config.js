@@ -20,6 +20,9 @@ const envVarsSchema = Joi.object({
   COOKIE_SECRET: Joi.string()
     .required()
     .description('Cookie Secret required to sign'),
+  SESSION_SECRET: Joi.string()
+    .required()
+    .description('Session Secret requried for flashing errors'),
   MONGO_HOST: Joi.string()
     .required()
     .description('Mongo DB host url'),
@@ -43,6 +46,7 @@ const config = {
     port: envVars.MONGO_PORT,
   },
   cookieSecret: envVars.COOKIE_SECRET,
+  sessionSecret: envVars.SESSION_SECRET,
 };
 
 module.exports = config;

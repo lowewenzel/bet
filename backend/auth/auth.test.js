@@ -15,16 +15,14 @@ chai.config.includeStack = true;
 describe('## Auth APIs', () => {
   // # TODO: Implement Authentication Tests.
   it('should signup a new user', (done) => {
-    User.findOneAndRemove({ username: 'test' }, () => {
+    User.findOneAndRemove({ email: 'test@gmail.com' }, () => {
       agent
         .post('/auth/new')
         .send({
-          username: 'test',
+          email: 'test@gmail.com',
           password: 'test',
-          fbUsername: 'lenzelwowe', // facebook
-          igUsername: 'renzelwowe', // instagram
-          twUsername: 'wenzelwowe', // twitter
-          scUsername: 'senzelwowe', // snapchat
+          firstName: 'Tester',
+          lastName: 'Show'
         })
         .end((req, res) => {
           res.status.should.be.equal(200);

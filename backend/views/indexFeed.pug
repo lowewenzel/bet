@@ -2,6 +2,19 @@ html
   head
     title= title
   body
+    // ERRORS
+    if error
+      p #{ error }
+    
     h1= message
     a(href='/profile') Profile
     a(href='/auth/logout') Logout
+    a(href='/bets/new') New Bet
+    h3 All Bets Feed
+    ul
+      each bet, index in bets
+        li
+          div
+            h3 bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
+            h4 #{bet.betValue}
+            p #{bet.betDescription}

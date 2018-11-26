@@ -2,6 +2,10 @@ html
   head
     title= title
   body
+    // ERRORS
+    if error
+      p #{ error }
+    
     h1= message
     a(href='/login') Login
     a(href='/signup') Signup
