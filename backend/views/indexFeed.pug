@@ -15,6 +15,9 @@ html
       each bet, index in bets
         li
           div
-            h3 bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
+            if bet.completed
+              h3(style="color:green") bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
+            else
+              h3(style="color:red") bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
             h4 #{bet.betValue}
             p #{bet.betDescription}
