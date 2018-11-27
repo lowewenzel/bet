@@ -11,7 +11,7 @@ const router = express.Router(); // eslint-disable-line new-cap
 // Checks if logged in, if logged in, return home feed
 router.get('/', (req, res, next) => {
   if (!req.cookies.nToken) {
-    res.render('index', { title: 'Bet. A Social Betting App', message: 'Welcome to Bet.', error: req.flash('homeError') });
+    res.render('index', { title: 'Bet. A Social Betting App', message: 'Welcome to Bet.', error: req.flash('homeError'), notLoggedIn: true });
   } else {
     next();
   }
@@ -24,6 +24,11 @@ router.use(authRoutes);
 router.use(userRoutes);
 
 // Bet routes (CRUD Bet)
-router.use(betRoutes)
+router.use(betRoutes);
+
+router.get('*', (req, res) => {
+  req.flash('homeError', '404 Page Not Found');
+  res.redirect('/');
+});
 
 module.exports = router;

@@ -1,11 +1,13 @@
-html
-  head
-    title= title
-  body
+extends layout.pug
+block content
+  .hero.is-primary.is-large
     // ERRORS
-    if error
-      p #{ error }
-    
-    h1= message
-    a(href='/login') Login
-    a(href='/signup') Signup
+    if error.length > 0
+      p Error: #{ error }
+    .hero-body
+      .container
+        h1.title Welcome to Bet.
+        p.subtitle A Social Betting App. Bet your friends on anything.
+        .container
+          a.button.is-white.is-medium(href='/login', style="margin-right:20px") Login
+          a.button.is-light.is-medium(href='/signup') Signup

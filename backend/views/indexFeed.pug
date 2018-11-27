@@ -1,24 +1,22 @@
-html
-  head
-    title= title
-  body
-    // ERRORS
-    if error
-      p #{ error }
-    
-    h1= message
-    a(href='/profile') Profile
-    a(href='/auth/logout') Logout
-    a(href='/bets/new') New Bet
-    a(href='/bets') My Bets
-    h3 All Bets Feed
-    ul
-      each bet, index in bets
-        li
-          div
-            if bet.completed
-              a(href=`/bet/${bet._id}`, style="color:green") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
-            else
-              a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
-            h4 #{bet.betValue}
-            p #{bet.betDescription}
+extends layout.pug
+block content
+  // ERRORS
+  if error
+    p #{ error }
+  
+  h1= message
+  a(href='/profile') Profile
+  a(href='/auth/logout') Logout
+  a(href='/bets/new') New Bet
+  a(href='/bets') My Bets
+  h3 All Bets Feed
+  ul
+    each bet, index in bets
+      li
+        div
+          if bet.completed
+            a(href=`/bet/${bet._id}`, style="color:green") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
+          else
+            a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
+          h4 #{bet.betValue}
+          p #{bet.betDescription}

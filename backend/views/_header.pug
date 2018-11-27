@@ -1,0 +1,21 @@
+block header
+  .navbar.is-light
+    .navbar-brand
+      a.navbar-item.title(href="/") Bet.
+    .navbar-menu
+      a(href="/").navbar-item Home
+      unless notLoggedIn
+        a(href="/bets").navbar-item My Bets
+    unless notLoggedIn
+      .navbar-end
+        a(href="/profile").navbar-item My Profile
+        a(href="/auth/logout").navbar-item Logout
+        .navbar-item
+          .buttons
+            a(href="bets/new").button.is-primary New Bet
+    if notLoggedIn
+      .navbar-end
+        a(href="/login").navbar-item Login
+        .navbar-item
+          .buttons
+            .a(href="/signup").button.is-primary Sign up

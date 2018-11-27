@@ -18,6 +18,7 @@
   "homepage": "https://github.com/lowewenzel/bet#readme",
   "dependencies": {
     "bcryptjs": "false2.4.3",
+    "bulma": "false0.7.2",
     "connect-flash": "false0.1.1",
     "cookie-parser": "false1.4.3",
     "cors": "false2.8.5",
