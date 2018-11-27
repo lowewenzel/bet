@@ -20,3 +20,18 @@ block content
             a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
           h4 #{bet.betValue}
           p #{bet.betDescription}
+          
+          div.card
+              header.card-header
+                  p.card-header-title
+                      if bet.completed
+                          a(href=`/bet/${bet._id}`, style="color:green") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
+                      else
+                          a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
+          div.card-content
+              div.content
+                  p #{bet.betDescription}
+                  h4 $#{bet.betValue}
+              
+                  
+                      
