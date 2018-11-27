@@ -17,27 +17,27 @@
   },
   "homepage": "https://github.com/lowewenzel/bet#readme",
   "dependencies": {
-    "bcryptjs": "false2.4.3",
-    "bulma": "false0.7.2",
-    "connect-flash": "false0.1.1",
-    "cookie-parser": "false1.4.3",
-    "cors": "false2.8.5",
-    "dotenv": "false6.1.0",
-    "eslint": "false5.9.0",
-    "eslint-config-airbnb-base": "false13.1.0",
-    "eslint-plugin-import": "false2.14.0",
-    "express": "false4.16.4",
-    "express-session": "false1.15.6",
-    "joi": "false14.1.0",
-    "jsonwebtoken": "false8.4.0",
-    "mongoose": "false5.3.13",
-    "mongoose-unique-validator": "false2.0.2",
-    "pug": "false2.0.3"
+    "bcryptjs": "2.4.3",
+    "bulma": "0.7.2",
+    "connect-flash": "0.1.1",
+    "cookie-parser": "1.4.3",
+    "cors": "2.8.5",
+    "dotenv": "6.1.0",
+    "eslint": "5.9.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "express": "4.16.4",
+    "express-session": "1.15.6",
+    "joi": "14.1.0",
+    "jsonwebtoken": "8.4.0",
+    "mongoose": "5.3.13",
+    "mongoose-unique-validator": "2.0.2",
+    "pug": "2.0.3"
   },
   "devDependencies": {
-    "chai": "false4.2.0",
-    "chai-http": "false4.2.0",
-    "cross-env": "false5.2.0",
-    "mocha": "false5.2.0"
+    "chai": "4.2.0",
+    "chai-http": "4.2.0",
+    "cross-env": "5.2.0",
+    "mocha": "5.2.0"
   }
 }
