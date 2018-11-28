@@ -1,7 +1,45 @@
 extends layout.pug
 block content
-  h1 Bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
-  h4 $#{bet.betValue}
-  p #{bet.betDescription}
-
-  a(href='/') Home
+  //- h1 Bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
+  //- h4 $#{bet.betValue}
+  //- p #{bet.betDescription}
+  //- a(href='/') Back
+  
+  // [remove hardcode] figure out bulma margins
+  div.container.sticky(style="margin-top: 10px;")
+    nav.level
+        div.level-item.has-text-centered
+            div
+                p.heading Bettor A
+                p.title(style="text-transform:capitalize;") #{bet.userA.firstName}
+        div.level-item.has-text-centered
+            div
+                p.heading Bettor B
+                p.title(style="text-transform:capitalize;") #{bet.userB.firstName}
+        div.level-item.has-text-centered
+            div
+                p.heading Bet
+                p.title(style="text-transform:capitalize;") #{bet.betDescription}
+        div.level-item.has-text-centered
+            div
+                p.heading Stake
+                p.title $#{bet.betValue}
+        div.level-item.has-text-centered
+            div
+                p.heading Status
+                p.title In Progress
+        
+                
+    div.columns(style="margin-top: 5px;")
+      div.column.is-full
+        //- h3 All Bets Feed
+        ul
+            li
+              div.card.bets
+                header.card-header
+                  p.card-header-title
+                      a(href=`/`, style="color:#4ECDB3;") Comments
+                div.card-content
+                  div.content
+                    a(href=`/bet/${bet._id}`)
+                        p.description
