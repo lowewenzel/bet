@@ -1,20 +1,21 @@
 extends layout.pug
 block content
-  .main.container
-    .row
-      .col-md-6.col-md-offset-3
-        h1.display-4.m-b-2 Login
+    // register form
+    // ERRORS
+    if error
+      p #{ error }
 
-        // ERRORS
-        if error
-          p #{ error }
-
-        // login form
-        form(method='POST' action='/auth/login')
-          div.form-group
-            label(for='email') Email:
-            input#email.form-control(type='email', placeholder='name@email.com', name='email')
-          div.form-group
-            label(for='pw') Password:
-            input#pw.form-control(type='password' name='password')
-          button.btn.btn-primary(type='submit') Login
+    div.container.sticky(style="margin-top: 10px; width: 50%")
+      form(method='POST' action='/auth/login')
+        div.form-group  
+          label.label(for='email') Email:
+          div.control
+            input.input#email.form-control(type='email', placeholder='name@email.com', name='email')
+        div.form-group
+          label.label(for='pw') Password:
+          div.control
+            input.input#pw.form-control(type='password' name='password')
+        div.form-group
+          div.control(style='margin-top: 10px;')
+            button.button.is-primary(type="submit") Login
+        
