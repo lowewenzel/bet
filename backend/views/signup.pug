@@ -1,27 +1,31 @@
 extends layout.pug
 block content
-  .main.container
-    .row
-      .col-md-6.col-md-offset-3
-        h1.display-4.m-b-2 Sign Up
-
-        // ERRORS
-        if error
-          p #{ error }
 
 
-        // register form
-        form(method='POST' action='/auth/new')
-          div.form-group
-            label(for='user') First Name:
-            input#user.form-control(type='text', placeholder='First Name', name='firstName')
-          div.form-group
-            label(for='user') Last Name:
-            input#user.form-control(type='text', placeholder='Last Name', name='lastName')
-          div.form-group
-            label(for='email') Email:
-            input#email.form-control(type='email', placeholder='name@email.com', name='email')
-          div.form-group
-            label(for='pw') Password:
-            input#pw.form-control(type='password' name='password')
-          button.btn.btn-primary(type='submit') Sign up
+  // ERRORS
+  if error
+    p #{ error }
+
+
+  // register form
+  div.container.sticky(style="margin-top: 10px;")
+    form(method='POST' action='/auth/new')
+      div.form-group
+        label.label(for='user') First Name:
+        div.control
+          input.input#user.form-control(type='text', placeholder='First Name', name='firstName')
+      div.form-group
+        label.label(for='user') Last Name:
+        div.control
+          input.input#user.form-control(type='text', placeholder='Last Name', name='lastName')
+      div.form-group
+        label.label(for='email') Email:
+        div.control
+          input.input#email.form-control(type='email', placeholder='name@email.com', name='email')
+      div.form-group
+        label.label(for='pw') Password:
+        div.control
+          input.input#pw.form-control(type='password' name='password')
+      div.form-group
+        div.control(style='margin-top: 10px;')
+          button.button.is-primary(type="submit") Sign up
