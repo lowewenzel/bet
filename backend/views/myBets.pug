@@ -12,7 +12,7 @@ block content
                     img(src="https://bulma.io/images/placeholders/96x96.png" alt="avatar")
                 div.media-content
                   // [remove hardcode] pass a name through
-                  p.title.is-4(style="margin-bottom:0px!important;") Tim Kaing
+                  p.title.is-4(style="margin-bottom:0px!important;") #{user.firstName} #{user.lastName}
                   h5 (user-name)
             div.card-footer
               a.card-footer-item(href='/profile') Profile
