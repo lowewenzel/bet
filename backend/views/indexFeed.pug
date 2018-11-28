@@ -12,22 +12,19 @@ block content
   h3 All Bets Feed
   ul
     each bet, index in bets
-      li
-        div
-          if bet.completed
-            a(href=`/bet/${bet._id}`, style="color:green") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
-          else
-            a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
-          h4 #{bet.betValue}
-          p #{bet.betDescription}
-          
+      li  
           div.card
               header.card-header
                   p.card-header-title
                       if bet.completed
-                          a(href=`/bet/${bet._id}`, style="color:green") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
+                          // lets add a win/loss conditional + comments + likes + date bet created
+                          a(href=`/bet/${bet._id}`, style="color:green; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
+                          a(href=`/bet/${bet._id}`, style="font-weight:300!important; color:black;") made a bet with&nbsp;
+                          a(href=`/bet/${bet._id}`, style="color:green; text-transform:capitalize;") #{bet.userB.firstName}
                       else
-                          a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
+                          a(href=`/bet/${bet._id}`, style="color:red; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
+                          a(href=`/bet/${bet._id}`, style="font-weight:300!important; color:black;") made a bet with&nbsp;
+                          a(href=`/bet/${bet._id}`, style="color:red; text-transform:capitalize;") #{bet.userB.firstName}
           div.card-content
               div.content
                   p #{bet.betDescription}
