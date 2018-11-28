@@ -89,7 +89,7 @@ exports.getIndex = function getIndex(req, res) {
       res.redirect('/auth/logout');
     } else {
       const user = decoded;
-      getBetsFromDb(bets => res.render('indexFeed', { title: 'Bet. A Social Betting App', message: `Hello ${user.firstName}`, bets, error: req.flash('homeError') }));
+      getBetsFromDb(bets => res.render('indexFeed', { title: 'Bet. A Social Betting App', message: `Hello ${user.firstName}`, user, bets, error: req.flash('homeError') }));
     }
   });
 };

@@ -7,7 +7,7 @@ const config = require('../config/config');
 exports.postNewUser = function postNewUser(req, res) {
   const newUser = new User(req.body);
   newUser.save().then((user) => {
-    const token = jwt.sign({ firstName: user.firstName, email: user.email, _id: user._id }, config.jwtSecret, { expiresIn: '1d' });
+    const token = jwt.sign({ firstName: user.firstName, lastName: user.lastName, email: user.email, _id: user._id }, config.jwtSecret, { expiresIn: '1d' });
     res.status(200).cookie('nToken', token).redirect('/');
   }).catch((err) => {
     req.flash('error', err.message);
@@ -33,7 +33,7 @@ exports.loginUser = function loginUser(req, res) {
         res.redirect('/login');
       } else {
       // Create a token
-        const token = jwt.sign({ firstName: user.firstName, email: user.email, _id: user._id }, config.jwtSecret, { expiresIn: '1d' });
+        const token = jwt.sign({ firstName: user.firstName, lastName: user.lastName, email: user.email, _id: user._id }, config.jwtSecret, { expiresIn: '1d' });
         // Set a cookie and redirect to root
         return res.status(200).cookie('nToken', token).redirect('/');
       }
