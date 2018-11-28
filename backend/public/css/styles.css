@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-p
+p, a
 {
     font-family: 'Work Sans', sans-serif;
 }
@@ -46,4 +46,11 @@ p
 .footer p
 {
     color: #F5F5F5;
+}
+
+.level-item
+{
+    background-color: #FFFFFF;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
