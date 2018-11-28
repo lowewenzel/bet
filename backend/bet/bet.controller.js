@@ -108,7 +108,7 @@ exports.getBets = function getBets(req, res) {
     req.flash('homeError', 'You must be logged in to view Bets!');
     res.redirect('/');
   } else {
-    getMyBets(req.user._id, bets => res.render('myBets', { bets }));
+    getMyBets(req.user._id, bets => res.render('myBets', { bets, user:req.user }));
   }
 };
 
