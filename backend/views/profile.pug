@@ -1,13 +1,22 @@
 extends layout.pug
 block content
-  .main.container
-    .row
-      .col-md-6.col-md-offset-3
-        h1.display-4.m-b-2 Profile
 
-        p #{ email }
-        p #{ firstName }
-        p #{ lastName }
+  div.container.sticky
+    div.columns(style="margin-top: 5px;")
+      div.column.is-full
+        div.card
+          div.card-content
+            div.media
+              div.media-left
+                figure.image.is-48x48
+                  img(src="https://bulma.io/images/placeholders/96x96.png" alt="avatar")
+              div.media-content
+                // [remove hardcode] pass a name through
+                h1.title.is-4(style="margin-bottom:0px!important;") My Profile
+                h2 First Name: #{ firstName }
+                h2 Last Name: #{ lastName }
+                h2 Email: #{ email }
 
-        // TODO: implement delete
-        //a(href="/user/delete" onclick="return confirm('Are you sure you want to delete your account?'")
+  // TODO: implement delete
+  // TODO: Add inline styling to bold the left text to the values
+  //a(href="/user/delete" onclick="return confirm('Are you sure you want to delete your account?'")
