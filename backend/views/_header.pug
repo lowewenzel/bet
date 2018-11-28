@@ -1,8 +1,9 @@
 block header
-  .navbar.is-light
+  .navbar.is-light(role="navigation")
     .navbar-brand
-      a.navbar-item.title(href="/") 
-        img(src="bet.png")
+      a.navbar-item.title(href="/")
+        // stop hardcoding for bulma
+        img(src="/assets/bet.png" style="max-height: 2.75rem;")
     .navbar-menu
       a(href="/").navbar-item Home
       unless notLoggedIn
