@@ -1,25 +1,27 @@
 extends layout.pug
 block content
-  .main.container
-    .row
-      .col-md-6.col-md-offset-3
-        h1.display-4.m-b-2 New Bet
-
-        // ERRORS
-        if error
-          p #{ error }
+    // ERRORS
+    if error
+      p #{ error }
 
 
-        // register form
-        form(method='POST' action='/bets/new')
-          div.form-group
-            label(for='betuser') Who to bet (email):
-            input#betuser.form-control(type='email', placeholder='tim@gmail.com', name='emailUserB')
-          div.form-group
-            label(for='desc') Bet Description:
-            input#desc.form-control(type='text', placeholder='Last Name', name='betDescription')
-          div.form-group
-            label(for='number') Bet Value:
-            span $
-            input#number.form-control(type='number', min='0.01', step='0.01', max='2500', value='0.01', name='betValue')
-          button.btn.btn-primary(type='submit') Make Bet
+    // register form
+    div.container.sticky(style="margin-top: 10px; width: 50%")
+      form(method='POST' action='/bets/new')
+        div.form-group
+          label.label(for='user') Who to bet (email):
+          div.control
+            input.input#betuser.form-control(type='email', placeholder='name@email.com', name='emailUserB')
+        div.form-group
+          label.label(for='user') Bet Description:
+          div.control
+            input.input#desc.form-control(type='text', placeholder='the turtle will beat the hare', name='betDescription')
+        div.form-group
+          label.label(for='email') Stake($):
+          div.control
+            input.input#number.form-control(type='number', min='0.01', step='0.01', max='2500', value='0.01', name='betValue')
+        div.form-group
+          div.control(style='margin-top: 10px;')
+            button.button.is-primary(type='submit') Make Bet
+            
+            
