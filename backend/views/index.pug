@@ -1,13 +1,12 @@
-extends layout.pug
+extends splash.pug
 block content
-  .hero.is-primary.is-large
-    // ERRORS
-    if error.length > 0
-      p Error: #{ error }
-    .hero-body
-      .container
-        h1.title Welcome to Bet.
-        p.subtitle A Social Betting App. Bet your friends on anything.
-        .container
-          a.button.is-white.is-medium(href='/login', style="margin-right:20px") Login
-          a.button.is-light.is-medium(href='/signup') Signup
+    section.hero.is-link.is-fullheight-with-navbar
+        div.hero-body
+            div.container
+                h1.title Welcome to Bet.
+                p.subtitle A Social Betting App. Bet your friends on anything.
+                a.button.is-white.is-medium(href='/login', style="margin-right:20px") Login
+                a.button.is-light.is-medium(href='/signup') Signup
+    
+    
+ 

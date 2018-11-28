@@ -54,3 +54,7 @@ p, a
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.hero.is-link {
+    background-color: #4ECDB3;
+    color: #fff;
