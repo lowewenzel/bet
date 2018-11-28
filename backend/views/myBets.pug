@@ -1,17 +1,44 @@
 extends layout.pug
 block content
-  a(href='/profile') Profile
-  a(href='/auth/logout') Logout
-  a(href='/bets/new') New Bet
-  a(href='/bets') My Bets
-  h3 My Bets Feed
-  ul
-    each bet, index in bets
-      li
-        div
-          if bet.completed
-            a(href=`/bet/${bet._id}`, style="color:green") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
-          else
-            a(href=`/bet/${bet._id}`, style="color:red") bet between #{bet.userA.firstName} & #{bet.userB.firstName}
-          h4 #{bet.betValue}
-          p #{bet.betDescription}
+    // [remove hardcode] figure out bulma margins
+    div.container.sticky
+      div.columns(style="margin-top: 5px;")
+        div.column.is-full
+          div.card
+            div.card-content
+              div.media
+                div.media-left
+                  figure.image.is-48x48
+                    img(src="https://bulma.io/images/placeholders/96x96.png" alt="avatar")
+                div.media-content
+                  // [remove hardcode] pass a name through
+                  p.title.is-4(style="margin-bottom:0px!important;") Tim Kaing
+                  h5 (user-name)
+            div.card-footer
+              a.card-footer-item(href='/profile') Profile
+              a.card-footer-item(href="/bets/new") New Bet
+              a.card-footer-item(href="/bets'") My Bet
+        
+            div.column.is-full
+              ul
+                each bet, index in bets
+                  li
+                    div.card.bets
+                      header.card-header
+                        p.card-header-title
+                          if bet.completed
+                            // lets add a win/loss conditional + comments + likes + date bet created
+                            a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
+                            a(style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
+                            a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
+                          else
+                            a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
+                            a(style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
+                            a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
+                      div.card-content
+                        div.content
+                          a(href=`/bet/${bet._id}`)
+                              p.description  #{bet.betDescription}
+                          h4 $#{bet.betValue}
+                      
+                      
