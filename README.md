@@ -7,8 +7,8 @@ A platform for betting on anything between friends (even non-friends) and family
 Visit the app [here](https://betdev.herokuapp.com)
 
 ## Table of Contents
-- [Motivation](#motivation)
-- [Screenshots](#screenshots)
+- [Introduction](#introduction)
+- [Features](#features)
 - [Tech/Framework Used](#tech/framework-used)
 - [Contributors](#contributors)
 - [License](#license)
