@@ -1,5 +1,6 @@
 # bet. A social betting app
-[logo]: https://github.com/lowewenzel/bet/blob/master/backend/public/assets/bet@3x.png?raw=true
+
+<img src="backend/public/assets/bet.png" height="100px">
 
 A platform for betting on anything between friends (even non-friends) and family. Easily bet on who wins on anything and everything.
 
