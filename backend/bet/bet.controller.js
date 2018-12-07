@@ -112,6 +112,15 @@ exports.getBets = function getBets(req, res) {
   }
 };
 
+exports.getCompleteBet = function getCompleteBet(req, res) {
+  if (!req.cookies.nToken) {
+    req.flash('homeError', 'You must be logged in to view Bets!');
+    res.redirect('/');
+  } else {
+    getBetFromDb(req.params.id, bet => res.render('completeView', { bet }));
+  }
+};
+
 
 exports.getUser = function getUser(req, res) {
 };

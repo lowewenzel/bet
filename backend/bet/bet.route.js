@@ -37,6 +37,8 @@ router.get('/bets', checkAuthentication, betController.getBets);
 
 router.get('/bet/:id', betController.getBet);
 
+router.get('/bet/:id/complete', betController.getCompleteBet);
+
 // router.get('/:username', userController.getOneUser);
 
 // router.patch('/:username', checkAuthentication, userController.updateUser);

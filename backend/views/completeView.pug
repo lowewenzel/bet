@@ -1,0 +1,7 @@
+extends layout.pug
+block content
+  h1 Bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
+  h4 $#{bet.betValue}
+  p #{bet.betDescription}
+  a(href='/') Back
+  
