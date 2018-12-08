@@ -22,14 +22,14 @@ exports.loginUser = function loginUser(req, res) {
   User.findOne({ email }, 'firstName email password').then((user) => {
     if (!user) {
       // User not found
-      req.flash('error', 'User with this email not found');
+      req.flash('error', 'User not found or wrong password');
       res.redirect('/login');
     }
     // Check the password
     user.comparePassword(password, (err, isMatch) => {
       if (!isMatch) {
         // Password does not match
-        req.flash('error', 'Wrong Password');
+        req.flash('error', 'User not found or wrong password');
         res.redirect('/login');
       } else {
       // Create a token

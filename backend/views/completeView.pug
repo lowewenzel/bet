@@ -1,7 +1,12 @@
 extends layout.pug
 block content
-  h1 Bet #{index} between #{bet.userA.firstName} & #{bet.userB.firstName}
-  h4 $#{bet.betValue}
-  p #{bet.betDescription}
-  a(href='/') Back
-  
+  form(method="post")
+    h1 who won?
+    div
+      input(type="radio" id="userA" name="winner" value=`${bet.userA._id}`)
+      label(for="userA") #{bet.userA.firstName}
+
+      input(type="radio" id="userB" name="winner" value=`${bet.userB._id}`)
+      label(for="userB") #{bet.userB.firstName}
+    div
+      button(type="submit") submit

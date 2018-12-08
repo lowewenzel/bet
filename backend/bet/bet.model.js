@@ -19,8 +19,21 @@ const BetSchema = new Schema({
   },
   completed: {
     type: Boolean
+  },
+  completionProgress: {
+    type: Schema.Types.Mixed
   }
 });
+
+/*
+  completionProgress: {
+    stage: 0 - incomplete, no winner
+           1 - one participant marked a winner
+           2 - both chose same winner
+  }
+
+
+*/
 
 BetSchema.pre('save', function createUser(next) {
   // Make createdAt and updatedAt
@@ -29,6 +42,11 @@ BetSchema.pre('save', function createUser(next) {
   if (!this.createdAt) {
     this.createdAt = now;
     this.completed = false;
+    this.completionProgress = {
+      stage: 0, // Int
+      winner: null, // User Object
+      firstMarker: null, // Email
+    };
   }
   next();
 });
