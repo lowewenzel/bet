@@ -1,4 +1,8 @@
 //- layout.pug
+
+// TODO: add class to content, make min-height 100vh
+
+
 html
   head
     title #{title} - Bet.
@@ -7,9 +11,31 @@ html
       link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css')
       link(rel='stylesheet', type='text/css', href='/css/styles.css')
       link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Work+Sans:400,600,700')
-    
+      script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous")   
   body.wrapper
     include _header.pug
+    block err
+      if locals.error
+        if error.length > 0
+          .modal.is-active
+            .modal-background
+            .modal-card
+              header.modal-card-head
+                p.modal-card-title Error!
+                button.delete
+              section.modal-card-body
+                p #{ error }
+    block msg
+      if locals.message
+        if message.length > 0
+          .modal.is-active
+            .modal-background
+            .modal-card
+              header.modal-card-head
+                p.modal-card-title Message from bet.
+                button.delete
+              section.modal-card-body
+                p #{ message }
     block content
     block foot
       footer.footer

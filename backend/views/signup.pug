@@ -1,12 +1,6 @@
 extends layout.pug
 block content
 
-
-  // ERRORS
-  if error
-    p #{ error }
-
-
   // register form
   div.container.sticky(style="margin-top: 10px; width: 50%")
     form(method='POST' action='/auth/new')

@@ -1,10 +1,10 @@
 extends layout.pug
 block content
-  // ERRORS
-  if error
-    p #{ error }
-
   //- h1= message
+
+  // TODO
+  // - add time with variable #{bet.date}
+  // - style the complete bet button I added
 
   // [remove hardcode] figure out bulma margins
   div.container.sticky
@@ -23,7 +23,7 @@ block content
           div.card-footer
             a.card-footer-item(href='/profile') Profile
             a.card-footer-item(href="/bets/new") New Bet
-            a.card-footer-item(href="/bets") My Bet
+            a.card-footer-item(href="/bets") My Bets
         //- a(href='/profile') Profile
         //- a(href='/auth/logout') Logout
         //- a(href='/bets/new') New Bet
@@ -36,17 +36,30 @@ block content
               div.card.bets
                 header.card-header
                   p.card-header-title
-                    if bet.completed
+
+                      // took out completed because completion is not boolean
                       // lets add a win/loss conditional + comments + likes + date bet created
                       a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
                       a(style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
                       a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
-                    else
-                      a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
-                      a(style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
-                      a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
+
+                      // STYLE ME
+                      case bet.completionProgress.stage
+                        when 0
+                          h5.card-header-icon In Progress
+                        when 1
+                          h5.card-header-icon Waiting Verification
+                        when 2
+                          h5.card-header-icon Completed
+                      
                 div.card-content
                   div.content
                     a(href=`/bet/${bet._id}`)
                         p.description  #{bet.betDescription}
                     h4 $#{bet.betValue}
+
+                    // STYLE ME
+                    if bet.isLoggedInUser
+                      if bet.completionProgress.stage == 0 || bet.completionProgress.stage == 1
+                        unless bet.currentUserCompletedBet
+                          a(href=`/bet/${bet._id}/complete`).button.is-primary Complete Bet

@@ -30,6 +30,7 @@
     "express-session": "1.15.6",
     "joi": "14.1.0",
     "jsonwebtoken": "8.4.0",
+    "moment": "false2.22.2",
     "mongoose": "5.3.13",
     "mongoose-unique-validator": "2.0.2",
     "pug": "2.0.3"

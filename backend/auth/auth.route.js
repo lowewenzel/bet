@@ -9,7 +9,7 @@ router.get('/signup', (req, res) => {
   if (req.cookies.nToken) {
     res.redirect('/'); // Go home if logged in
   } else {
-    res.render('signup', { title: 'Signup', message: 'Signup User', error: req.flash('error'), notLoggedIn: true });
+    res.render('signup', { title: 'Signup', error: req.flash('error'), notLoggedIn: true });
   }
 });
 
@@ -17,7 +17,7 @@ router.get('/login', (req, res) => {
   if (req.cookies.nToken) {
     res.redirect('/'); // Go home if logged in
   } else {
-    res.render('login', { title: 'Login', message: 'Login User', error: req.flash('error'), notLoggedIn: true });
+    res.render('login', { title: 'Login', error: req.flash('error'), notLoggedIn: true });
   }
 });
 
