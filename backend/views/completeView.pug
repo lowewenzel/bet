@@ -1,12 +1,15 @@
 extends layout.pug
 block content
-  form(method="post")
-    h1 who won?
-    div
-      input(type="radio" id="userA" name="winner" value=`${bet.userA._id}`)
-      label(for="userA") #{bet.userA.firstName}
+  div.container.sticky(style="margin-top: 30px;")
+    nav.level
+        form(method="post" style="width:100%")
+          h1.title Who won the bet?
+          h2.subtitle #{bet.userA.firstName} bet #{bet.userB.firstName}: #{bet.betDescription}
+          div.control.columns
+            label(for="userA").card.radio.column.is-half.is-size-4 #{bet.userA.firstName}
+              input(type="radio" id="userA" name="winner" style="margin-left: 10px" value=`${bet.userA._id}`)
 
-      input(type="radio" id="userB" name="winner" value=`${bet.userB._id}`)
-      label(for="userB") #{bet.userB.firstName}
-    div
-      button(type="submit") submit
+            label(for="userB").card.radio.column.is-half.is-size-4 #{bet.userB.firstName}
+              input(type="radio" id="userB" name="winner" style="margin-left: 10px" value=`${bet.userB._id}`)
+          div
+            button(type="submit").button.is-primary.is-pulled-right Submit

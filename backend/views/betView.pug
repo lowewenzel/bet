@@ -10,61 +10,63 @@ block content
   // - style complete button
   
   
-  // [remove hardcode] figure out bulma margins
   div.container.sticky(style="margin-top: 10px;")
-    nav.level
-        div.level-item.has-text-centered
-            div
-                p.heading Bettor A
-                p.title(style="text-transform:capitalize;") #{bet.userA.firstName}
-        div.level-item.has-text-centered
-            div
-                p.heading Bettor B
-                p.title(style="text-transform:capitalize;") #{bet.userB.firstName}
-        div.level-item.has-text-centered
-            div
-                p.heading Bet
-                p.title(style="text-transform:capitalize;") #{bet.betDescription}
-        div.level-item.has-text-centered
-            div
-                p.heading Stake
-                p.title $#{bet.betValue}
-        div.level-item.has-text-centered
-            div
-                p.heading Status
+    div.card(style="margin-bottom: 30px")
+      nav.level
+          div.level-item.has-text-centered
+              div
+                  p.heading Bettor A
+                  p.title(style="text-transform:capitalize;") #{bet.userA.firstName}
+          div.level-item.has-text-centered
+              div
+                  p.heading Bettor B
+                  p.title(style="text-transform:capitalize;") #{bet.userB.firstName}
+          div.level-item.has-text-centered
+              div
+                  p.heading Stake
+                  p.title $#{bet.betValue}
+          div.level-item.has-text-centered
+              div
+                  p.heading Status
 
-                // STYLE ME
-                case bet.completionProgress.stage
-                  when 0
-                    p.title In Progress
-                  when 1
-                    p.title Waiting Verification
-                  when 2
-                    p.title Completed
+                  // STYLE ME
+                  case bet.completionProgress.stage
+                    when 0
+                      p.title In Progress
+                    when 1
+                      p.title Waiting Verification
+                    when 2
+                      p.title Completed
+      .card-content
+        p.heading Bet Description
+          p #{bet.betDescription}
         
                 
-    div.columns(style="margin-top: 5px;")
-      div.column.is-full
-        //- h3 All Bets Feed
-        ul
-            li
-              div.card.bets
-                header.card-header
-                  p.card-header-title
-                      a(href=`/`, style="color:#4ECDB3;") Comments
-                div.card-content
-                  div.content
-                    a(href=`/bet/${bet._id}`)
-                        p.description
+    //- div.columns(style="margin-top: 5px;")
+    //-   div.column.is-full
+    //-     //- h3 All Bets Feed
+    //-     ul
+    //-         li
+    //-           div.card.bets
+    //-             header.card-header
+    //-               p.card-header-title
+    //-                   a(href=`/`, style="color:#4ECDB3;") Comments
+    //-             div.card-content
+    //-               div.content
+    //-                 a(href=`/bet/${bet._id}`)
+    //-                     p.description
 
     if bet.completionProgress.winner
-      p.title Winner:
-      span #{bet.completionProgress.winner.firstName}
-      if bet.completionProgress.stage == 1
-        span (awaiting verification)
+      .card
+        .card-header
+          .card-header-title Winner:
+        .card-content
+          span.title #{bet.completionProgress.winner.firstName} 
+          if bet.completionProgress.stage == 1
+            span.subtitle (awaiting verification)
 
     if isLoggedInUser
       if bet.completionProgress.stage == 0 || bet.completionProgress.stage == 1
         unless currentUserCompletedBet
           p
-            a.button.is-primary(href=`/bet/${bet._id}/complete`) Complete Bet
+            a.button.is-pulled-right.is-large.is-primary(href=`/bet/${bet._id}/complete`) Complete Bet

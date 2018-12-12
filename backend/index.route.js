@@ -21,7 +21,6 @@ router.use(userRoutes);
 router.use(betRoutes);
 
 router.get('*', (req, res) => {
-  req.flash('homeError', '404 Page Not Found');
   res.redirect('/');
 });
 

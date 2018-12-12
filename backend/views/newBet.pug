@@ -12,13 +12,13 @@ block content
         div.form-group
           label.label(for='user') Bet Description:
           div.control
-            input.input#desc.form-control(type='text', placeholder='the turtle will beat the hare', name='betDescription')
+            input.input#desc.form-control(type='text', maxlength="256", placeholder='The turtle will beat the hare.', name='betDescription')
         div.form-group
           label.label(for='email') Stake($):
           div.control
-            input.input#number.form-control(type='number', min='0.01', step='0.01', max='2500', value='0.01', name='betValue')
+            input.input#number.form-control(type='number', min='0.01', step='0.01', max='2500', value='5.00', name='betValue')
         div.form-group
           div.control(style='margin-top: 10px;')
-            button.button.is-primary(type='submit') Make Bet
+            button.button.is-pulled-right.is-primary(type='submit') Make Bet
             
             

@@ -8,8 +8,8 @@ block content
 
   // [remove hardcode] figure out bulma margins
   div.container.sticky
-    div.columns(style="margin-top: 5px;")
-      div.column.is-one-quarter
+    div.columns(style="margin: 10px;")
+      div.column
         div.card
           div.card-content
             div.media
@@ -19,10 +19,9 @@ block content
               div.media-content
                 // [remove hardcode] pass a name through
                 p.title.is-4(style="margin-bottom:0px!important;") #{user.firstName} #{user.lastName}
-                h5 (user-name)
+                h5 (#{user.email})
           div.card-footer
             a.card-footer-item(href='/profile') Profile
-            a.card-footer-item(href="/bets/new") New Bet
             a.card-footer-item(href="/bets") My Bets
         //- a(href='/profile') Profile
         //- a(href='/auth/logout') Logout
@@ -39,9 +38,9 @@ block content
 
                       // took out completed because completion is not boolean
                       // lets add a win/loss conditional + comments + likes + date bet created
-                      a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
-                      a(style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
-                      a(href=`/`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
+                      a(href=`/bet/${bet._id}`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
+                      a(href=`/bet/${bet._id}`, style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
+                      a(href=`/bet/${bet._id}`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
 
                       // STYLE ME
                       case bet.completionProgress.stage
@@ -49,8 +48,10 @@ block content
                           h5.card-header-icon In Progress
                         when 1
                           h5.card-header-icon Waiting Verification
+                            span.has-text-info  (#{bet.completionProgress.winner.firstName})
                         when 2
-                          h5.card-header-icon Completed
+                          h5.card-header-icon Completed 
+                            span.has-text-primary  (#{bet.completionProgress.winner.firstName})
                       
                 div.card-content
                   div.content

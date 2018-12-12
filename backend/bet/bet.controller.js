@@ -14,7 +14,7 @@ exports.postNewBet = function postNewBet(req, res) {
   User.findOne({ email: emailUserB }).orFail(new Error('User not found'))
     .catch((err) => {
       req.flash('newBetError', err.message);
-      res.redirect('/bets/new').send();
+      res.redirect(`/bets/new`).send();
     })
     .then((user) => {
       User.findById(req.user._id).orFail(new Error('You must be logged in!'))
