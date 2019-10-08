@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const mongoose = require('mongoose');
@@ -5,26 +6,42 @@ const config = require('../config/config');
 const User = require('../user/user.model');
 const Bet = require('./bet.model');
 
-
 /*  (C)reate Bet
-**
-*/
+ **
+ */
 exports.postNewBet = function postNewBet(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash(
+      'error',
+      errors
+        .array()
+        .map(e => e.msg)
+        .join('. ')
+    );
+    res.redirect('/bets/new');
+  }
+
   const { betDescription, betValue, emailUserB } = req.body;
-  User.findOne({ email: emailUserB }).orFail(new Error('User not found'))
+  User.findOne({ email: emailUserB })
+    .orFail(new Error('User not found'))
     .catch((err) => {
       req.flash('newBetError', err.message);
-      res.redirect(`/bets/new`).send();
+      res.redirect('/bets/new').send();
     })
     .then((user) => {
-      User.findById(req.user._id).orFail(new Error('You must be logged in!'))
+      User.findById(req.user._id)
+        .orFail(new Error('You must be logged in!'))
         .catch((err) => {
           req.flash('error', err.message);
           res.redirect('/').send();
         })
         .then((origUser) => {
           const newBet = new Bet({
-            betDescription, betValue, userA: origUser, userB: user
+            betDescription,
+            betValue,
+            userA: origUser,
+            userB: user
           });
 
           // Save bet to user objects
@@ -33,7 +50,8 @@ exports.postNewBet = function postNewBet(req, res) {
           origUser.save();
           user.save();
 
-          newBet.save()
+          newBet
+            .save()
             .then((bet) => {
               res.status(200).redirect(`/bet/${bet._id}`);
             })
@@ -45,10 +63,9 @@ exports.postNewBet = function postNewBet(req, res) {
     });
 };
 
-
 /* (R)ead Bet
-**
-*/
+ **
+ */
 function getBetsFromDb(callback, limit = null) {
   if (limit) {
     Bet.find({})
@@ -56,13 +73,17 @@ function getBetsFromDb(callback, limit = null) {
       .populate('userB')
       .sort({ createdAt: -1 })
       .limit(limit)
-      .then((bets) => { callback(bets); });
+      .then((bets) => {
+        callback(bets);
+      });
   } else {
     Bet.find({})
       .populate('userA')
       .populate('userB')
       .sort({ createdAt: -1 })
-      .then((bets) => { callback(bets); });
+      .then((bets) => {
+        callback(bets);
+      });
   }
 }
 
@@ -71,9 +92,7 @@ function getBetFromDb(id, callback) {
   Bet.findById(strId)
     .populate('userA')
     .populate('userB')
-    .then(
-      bet => callback(bet)
-    );
+    .then(bet => callback(bet));
 }
 
 function getMyBets(_id, callback) {
@@ -91,9 +110,7 @@ function getMyBets(_id, callback) {
       }
     })
     .sort({ createdAt: -1 })
-    .then(
-      bets => callback(bets.bets)
-    );
+    .then(bets => callback(bets.bets));
 }
 
 exports.getIndex = function getIndex(req, res) {
@@ -104,9 +121,17 @@ exports.getIndex = function getIndex(req, res) {
     } else {
       const user = decoded;
       getBetsFromDb((bets) => {
-        bets.forEach((bet) => { bet.date = moment(bet.createdAt).calendar(); bet.isLoggedInUser = (bet.userA.email === req.user.email || bet.userB.email === req.user.email); bet.currentUserCompletedBet = (bet.completionProgress.firstMarker === req.user.email) });
+        bets.forEach((bet) => {
+          bet.date = moment(bet.createdAt).calendar();
+          bet.isLoggedInUser =            bet.userA.email === req.user.email
+            || bet.userB.email === req.user.email;
+          bet.currentUserCompletedBet =            bet.completionProgress.firstMarker === req.user.email;
+        });
         res.render('indexFeed', {
-          title: 'Bet. A Social Betting App', user, bets: bets, error: req.flash('homeError')
+          title: 'Bet. A Social Betting App',
+          user,
+          bets,
+          error: req.flash('homeError')
         });
       }, 3);
     }
@@ -130,7 +155,7 @@ exports.getBet = function getBet(req, res) {
     getBetFromDb(req.params.id, (bet) => {
       const firstMarker = bet.completionProgress.firstMarker;
       let currentUserCompletedBet = false;
-      if (firstMarker === req.user.email){
+      if (firstMarker === req.user.email) {
         currentUserCompletedBet = true;
       }
       res.render('betView', {
@@ -139,7 +164,9 @@ exports.getBet = function getBet(req, res) {
         error: req.flash('betError'),
         message: req.flash('message'),
         currentUserCompletedBet,
-        isLoggedInUser: (bet.userA.email === req.user.email || bet.userB.email === req.user.email)
+        isLoggedInUser:
+          bet.userA.email === req.user.email
+          || bet.userB.email === req.user.email
       });
     });
   }
@@ -152,21 +179,21 @@ exports.getCompleteBet = function getCompleteBet(req, res) {
   } else {
     getBetFromDb(req.params.id, (bet) => {
       const firstMarker = bet.completionProgress.firstMarker;
-      if (firstMarker === req.user.email){
+      if (firstMarker === req.user.email) {
         req.flash('betError', 'Error: You already completed this bet!');
         res.redirect(`/bet/${req.params.id}`);
+      } else if (
+        bet.userA.id === req.user._id
+        || bet.userB.id === req.user._id
+      ) {
+        res.render('completeView', { bet });
       } else {
-        if (bet.userA.id === req.user._id || bet.userB.id === req.user._id) {
-          res.render('completeView', { bet });
-        } else {
-          req.flash('betError', 'Authentication error: This is not your bet!');
-          res.redirect(`/bet/${req.params.id}`);
-        }
+        req.flash('betError', 'Authentication error: This is not your bet!');
+        res.redirect(`/bet/${req.params.id}`);
       }
     });
   }
 };
-
 
 exports.postCompleteStageOne = function postCompleteStageOne(req, res) {
   getBetFromDb(req.params.id, async (bet) => {
@@ -181,7 +208,10 @@ exports.postCompleteStageOne = function postCompleteStageOne(req, res) {
               firstMarker: req.user.email
             };
             await bet.save();
-            req.flash('message', 'You marked this bet completed! The other user now needs to complete the bet to verify who won.');
+            req.flash(
+              'message',
+              'You marked this bet completed! The other user now needs to complete the bet to verify who won.'
+            );
           } catch (err) {
             req.flash('betError', `Error choosing winner: ${err.message}`);
           }
@@ -203,7 +233,10 @@ exports.postCompleteStageOne = function postCompleteStageOne(req, res) {
                   stage: 0,
                   winner: null
                 };
-                req.flash('message', 'Oh no! You both chose different winners. Resolve it by texting them, talking it out over coffee, or other means of convincing!');
+                req.flash(
+                  'message',
+                  'Oh no! You both chose different winners. Resolve it by texting them, talking it out over coffee, or other means of convincing!'
+                );
               }
               await bet.save();
             } catch (err) {
@@ -226,12 +259,8 @@ exports.postCompleteStageOne = function postCompleteStageOne(req, res) {
   });
 };
 
+exports.getUser = function getUser(req, res) {};
 
-exports.getUser = function getUser(req, res) {
-};
+exports.updateUser = function updateUser(req, res) {};
 
-exports.updateUser = function updateUser(req, res) {
-};
-
-exports.deleteUser = function deleteUser(req, res) {
-};
+exports.deleteUser = function deleteUser(req, res) {};

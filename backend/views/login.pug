@@ -7,11 +7,11 @@ block content
         div.form-group  
           label.label(for='email') Email:
           div.control
-            input.input#email.form-control(type='email', placeholder='name@email.com', name='email')
+            input.input#email.form-control(type='email', placeholder='name@email.com', name='email', required=true, maxlength="36")
         div.form-group
           label.label(for='pw') Password:
           div.control
-            input.input#pw.form-control(type='password' name='password')
+            input.input#pw.form-control(type='password' name='password', required=true, maxlength="24")
         div.form-group
           div.control(style='margin-top: 10px;')
             button.button.is-primary(type="submit") Login

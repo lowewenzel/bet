@@ -7,19 +7,19 @@ block content
       div.form-group
         label.label(for='user') First Name:
         div.control
-          input.input#user.form-control(type='text', placeholder='First Name', name='firstName')
+          input.input#user.form-control(type='text', placeholder='First Name', name='firstName', required=true, maxlength="24")
       div.form-group
         label.label(for='user') Last Name:
         div.control
-          input.input#user.form-control(type='text', placeholder='Last Name', name='lastName')
+          input.input#user.form-control(type='text', placeholder='Last Name', name='lastName', required=true, maxlength="24")
       div.form-group
         label.label(for='email') Email:
         div.control
-          input.input#email.form-control(type='email', placeholder='name@email.com', name='email')
+          input.input#email.form-control(type='email', placeholder='name@email.com', name='email', required=true, maxlength="36")
       div.form-group
         label.label(for='pw') Password:
         div.control
-          input.input#pw.form-control(type='password' name='password')
+          input.input#pw.form-control(type='password' name='password', required=true, maxlength="24")
       div.form-group
         div.control(style='margin-top: 10px;')
           button.button.is-primary(type="submit") Sign up
