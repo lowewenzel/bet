@@ -28,9 +28,9 @@ block content
 
                       // took out completed because completion is not boolean
                       // lets add a win/loss conditional + comments + likes + date bet created
-                      a(href=`/bet/${bet._id}`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
-                      a(href=`/bet/${bet._id}`, style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
-                      a(href=`/bet/${bet._id}`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
+                      a(href=`/bet/${bet.slug ? bet.slug : bet._id}`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userA.firstName}&nbsp;
+                      a(href=`/bet/${bet.slug ? bet.slug : bet._id}`, style="font-weight:300!important; color:#4a4a4a;") made a bet with&nbsp;
+                      a(href=`/bet/${bet.slug ? bet.slug : bet._id}`, style="color:#4ECDB3; text-transform:capitalize;") #{bet.userB.firstName}
 
                       // STYLE ME
                       case bet.completionProgress.stage
@@ -44,7 +44,7 @@ block content
                             span.has-text-primary  (#{bet.completionProgress.winner.firstName})
                 div.card-content
                   div.content
-                    a(href=`/bet/${bet._id}`)
+                    a(href=`/bet/${bet.slug ? bet.slug : bet._id}`)
                         p.description  #{bet.betDescription}
                     h4 $#{bet.betValue}
 
@@ -52,6 +52,6 @@ block content
                     if bet.isLoggedInUser
                       if bet.completionProgress.stage == 0 || bet.completionProgress.stage == 1
                         unless bet.currentUserCompletedBet
-                          a(href=`/bet/${bet._id}/complete`).button.is-primary Complete Bet
+                          a(href=`/bet/${bet.slug ? bet.slug : bet._id}/complete`).button.is-primary Complete Bet
                       
                       

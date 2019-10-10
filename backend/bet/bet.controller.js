@@ -53,7 +53,7 @@ exports.postNewBet = function postNewBet(req, res) {
           newBet
             .save()
             .then((bet) => {
-              res.status(200).redirect(`/bet/${bet._id}`);
+              res.status(200).redirect(`/bet/${bet.slug ? bet.slug : bet._id}`);
             })
             .catch((err) => {
               req.flash('newBetError', err.message);
@@ -88,11 +88,19 @@ function getBetsFromDb(callback, limit = null) {
 }
 
 function getBetFromDb(id, callback) {
-  const strId = `${id}`;
-  Bet.findById(strId)
-    .populate('userA')
-    .populate('userB')
-    .then(bet => callback(bet));
+  // slug
+  if (id.includes('-')) {
+    Bet.findOne({ slug: id })
+      .populate('userA')
+      .populate('userB')
+      .then(bet => callback(bet));
+  } else {
+    const strId = `${id}`;
+    Bet.findById(strId)
+      .populate('userA')
+      .populate('userB')
+      .then(bet => callback(bet));
+  }
 }
 
 function getMyBets(_id, callback) {
