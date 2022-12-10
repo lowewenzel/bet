@@ -27,7 +27,7 @@
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-utils": "false1.4.2",
-    "express": "4.16.4",
+    "express": "4.17.3",
     "express-session": "1.15.6",
     "express-validator": "false6.2.0",
     "joi": "14.1.0",
